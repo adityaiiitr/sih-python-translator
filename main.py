@@ -22,7 +22,8 @@ class Translate(BaseModel):
     lang:str = 'en'
 
 @app.post("/translate")
-async def analyze_sentiment(request: Translate):
+async def translate_to_language(request: Translate):
     text = request.text
-    text = translateText(text,request.lang,'en')
+    if(request.lang!='en'):
+        text = translateText(text,request.lang,'en')
     return {"success":True, "result":text}
